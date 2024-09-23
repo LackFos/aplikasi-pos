@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import MenuModel from "../../models/MenuModel";
 
 import responseHelper from "../../libs/helpers/responseHelper";
+import { ImageDocument } from "../../interfaces/image";
 
 export const getAllMenu = async (req: Request, res: Response) => {
   try {
@@ -22,7 +23,12 @@ export const getSingleMenu = async (req: Request, res: Response) => {
   try {
     const { menuId } = req.params;
 
-    const menu = await MenuModel.findById(menuId);
+    const menu = await MenuModel.findById(menuId)
+      .populate<{ image: ImageDocument }>({
+        path: "image",
+        select: "url",
+      })
+      .select("-__v -createdAt -updatedAt");
 
     if (!menu) {
       return responseHelper.throwNotFound(res, "Menu not found");

@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import connectToDatabase from "./database";
 
 import menuRouter from "./routes/MenuRoutes";
+import mongoose from "mongoose";
 
 dotenv.config();
 connectToDatabase();

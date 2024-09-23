@@ -5,6 +5,6 @@ export interface MenuDocument {
   name: string;
   description: string;
   basePrice: number;
-  image: string;
+  image?: ObjectId;
   categories: string[];
 }

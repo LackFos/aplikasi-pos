@@ -6,7 +6,7 @@ const MenuSchema = new mongoose.Schema<MenuDocument>(
     name: { type: String, required: true },
     description: { type: String },
     basePrice: { type: Number, required: true },
-    image: { type: String },
+    image: { type: mongoose.Schema.ObjectId, ref: "Image" },
     categories: { type: [String] },
   },
   {
